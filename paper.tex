@@ -1,0 +1,135 @@
+% Class and packages {{{
+
+\documentclass[conference]{IEEEtran}
+%% \documentclass[sigconf,anonymous]{acmart}
+
+%% \fancyhf{} % Remove fancy page headers 
+%% \fancyhead[C]{Anonymous submission \#XXX to ACM CCS 2018}
+%% \fancyfoot[C]{\thepage}
+%% 
+%% \setcopyright{none} % No copyright notice required for submissions
+%% % \acmConference[Anonymous Submission to ACM CCS 2018]{ACM Conference on
+%% % Computer and Communications Security}{Due 8 May 2018}{Toronto, Canada}
+%% % \acmYear{2018}
+%% 
+%% \settopmatter{printacmref=false, printccs=true, printfolios=true} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+
+% \usepackage{algorithm}
+%\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{comment}
+\usepackage{epsfig}
+\usepackage{graphicx}
+%\usepackage{subfigure}
+\usepackage[labelformat=simple]{subcaption}
+\usepackage{tabularx}
+%\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\usepackage{wrapfig}
+%\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{xspace}
+\usepackage{multirow}
+
+\usepackage{tikz}
+\usepackage{cleveref}
+\usepackage{algorithm}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.5pt] (char) {#1};}}
+%\newenvironment{widelist}{\begin{list}{$\bullet$}{\setlength{\leftmargin}{.40cm}\setlength{\itemsep}{.00cm} }}{\end{list}}
+\newenvironment{widelist}{\begin{list}{$\bullet$}{\setlength{\leftmargin}{.70cm}\setlength{\itemsep}{.00cm} }}{\end{list}}
+
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Per-author comment commands
+% NOTE: To generate output without comments, build with 'make finalized'.
+% This generates a new output file with the suffix '-final.pdf'.
+
+\newcommand{\etal}{et~al.\xspace}
+
+\ifdefined\isFinalized
+
+\newcommand{\todo}[1]{}
+\newcommand{\wontfix}[1]{}
+\newcommand{\done}[1]{}
+\usepackage{ulem}
+\normalem
+
+\else
+
+
+\usepackage{ulem}
+\normalem
+\newcommand{\todo}[1]{{\color{red}{Todo: #1}}}
+\newcommand{\wontfix}[1]{}
+\newcommand{\done}[1]{}
+\newcommand{\minor}[2]{{\color{Orange}{\sout{#1}}\color{Blue}{#2}} }
+
+\fi
+\newcommand{\parhead}[1]{\medskip \noindent \textbf{#1}~~}
+
+\usepackage{balance}
+% }}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cleveref configuration {{{
+
+\crefname{figure}{Figure}{Figures}
+\crefname{equation}{Equation}{Equations}
+\crefname{table}{Table}{Tables}
+\crefname{section}{Section}{Sections}
+\crefname{subfigure}{Figure}{Figure}
+
+% }}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title and authors % {{{
+
+
+\title{Improving Rule Extraction by Modifying Error Backpropogation}
+
+\author{
+	Matt Goldberg, Willy Lang, Ben Mariano, Alex McKay
+    
+}
+
+% }}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document
+
+\usepackage[override]{cmtt} % make tt font tighter / less ugly
+
+\clubpenalty=10000 
+\widowpenalty = 10000 
+
+\hyphenation{de-a-non-y-mi-za-tion}
+\hyphenation{none-the-less}
+\begin{document}
+
+\urlstyle{tt}
+
+\maketitle
+
+\input{abstract}
+\input{intro}
+\input{related}
+\input{method}
+\input{results}
+\input{discussion}
+
+
+\balance
+
+\bibliographystyle{abbrv}
+\bibliography{refs}
+
+
+% Maybe include code here
+\appendix
+
+\end{document}
+
