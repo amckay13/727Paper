@@ -1,4 +1,77 @@
 \section{Results}
 \label{sec:results}
 
+To test the effectiveness of our new error term for rule extraction,
+we applied our approach to five \todo{will we actually do 5 datasets}
+datasets from the UCI Machine Learning Repository \cite{uci}. Our
+datasets are all classifications problems, covering a wide-range of
+use-cases including
+\todo{add description of a few datasets once we decide on final set}
+. An overview of our datasets is given in \ref{tab:datasets}.
+
+In particular, we ran each dataset using two different approaches. The first
+used only standard mean-squared error $E_1$. The second used both
+$E_1$ and our node separation term $E_2$. For each run, we recorded
+the $E1$ accuracy and the $E_2$ error. Our goal is to achieve
+high comparable $E_1$ accuracy but allso higher $E_2$ when including
+$E_2$ in our error term for the network.
+
+\begin{table} 
+  \begin{tabular}{|l|r|}
+    dataset & blah \\
+  \end{tabular}
+  \caption{UCI Machine Learning Datasets \todo{fill out table}}
+  \label{tab:datasets}
+\end{table}
+
+There were a number of important design decisions for our networks
+which we describe briefly below:
+
+\begin{enumerate}
+\item
+  We tested every dataset on three different networks, with one,
+  two, and three hiden layers respectively. Each hidden layer had
+  four nodes \footnote{We used four as this is what was used in \cite{thuan11}}.
+\item
+  All weights in the networks were initialized by sampling from the
+  uniform distribution from $[-1,1]$. Error backpropagation used RPROP
+  to update weights.
+\item
+  $\beta$ values are critical to network performance. Thus, we automated
+  tests to find $\beta$ values for each dataset and network using the
+  following algorithm
+  \begin{enumerate}
+  \item
+    Start $\beta$ at some reasonable upper limit ($0.01$).
+  \item
+    Use $\beta$ value to train four new networks. Also train four
+    networks using only standard $E_1$ error.
+  \item
+    Assess accuracy of networks on testing data. If average accuracy
+    across the four networks is greater than $0.05$ off of the average
+    accuracy of the $E_1$ nets, repeat the process with
+    $\beta = \frac{\beta}{2}$. If not, return $\beta$.    
+  \end{enumerate}
+  $\alpha$ simply initialized to $1-\beta$ after this process.
+\item
+  We implemented early stopping to make training quicker. We use a simple
+  method which stops after $100$ epochs if a new best accuracy on the
+  training data has not been achieved. In practice, we found $100$ epochs is
+  a big enough window that it does not significantly degrade performance.
+  We run for a maximum of $400$ epochs.
+\item
+  $20\%$ of the data is reserved for validation, while the other $80\%$ is
+  used for training. The data is randomly partitioned for each dataset and
+  each network, but is kept the same for comparison of just $E1$ and $E1$
+  with $E2$ for the same network/dataset.
+\item
+  Each network encodes outputs using standard one-hot encoding, where the number
+  of output nodes is the number of classes, and the predicted class is the
+  output node with the maximum activation.
+\item
+  We ran each dataset on each network 21 times. We computed both the average
+  mean-squared error $E_1/N$ as well as the average node separation
+  $-E_2/N^2$.
+\end{enumerate}
+
 %From Reggia: What were the findings?Visualizations for the results
