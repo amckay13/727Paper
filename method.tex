@@ -1,9 +1,95 @@
 \section{Methodology}
 \label{sec:method}
 
-\subsection{Neural Network}
+\subsection{New Error Term}
 \label{sec:nn}
 
+In this paper, we are considering standard feed-forward networks with
+sigmoid activation functions for all nodes in the network. More formally,
+for all layers $l$ in the network, the activation of the $j^{th}$ node
+$a_{H_{l_j}}^p$ for the $p^{th}$ input pattern is given by
+
+\begin{equation}
+  a_{H_{l_j}}^p = \sigma(\sum_{i\in H_{l-1}}{w_{ji}a_{H_{l-1_i}}^p})
+\end{equation}
+
+where $\sigma$ is the standard sigmoid function $\sigma(x)=\frac{1}{1+e^{-x}}$
+and $w_{ji}$ is the weight from node $i$ in the previous layer to node $j$.
+
+We use standard mean-squared error term
+\footnote{
+It should be noted that using
+mean-squared error is not standard for neural networks used for
+classification, however we use mean-squared error as this is the error
+used by \cite{thuan11} who use a similar approach for simplifying rule
+extraction in single-layer feed-forward nets.
+}
+
+\begin{equation}
+  E_1 = \frac{1}{2}\sum_{p=1}^{N} \sum_{k \in output} (t_k^p-a_{O_k}^p)^2
+\end{equation}
+
+where $N$ is the number of input patterns and $t_k^p$ is the target activation
+of output node $k$ for input pattern $p$.
+
+We introduce a new error term $E_2$ which is proportional to the distance between
+activations in each hidden layer
+
+\begin{equation}
+  E_2 = -\frac{1}{2}\sum_{p=1}^{N} \sum_{q=1}^{N} \sum_{l=1}^{M} \sum_{k \in H_l} (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2
+\end{equation}
+
+where $M$ is the number of hidden layers.
+
+We define our total error term as
+
+\begin{equation}
+  E = \alpha E_1 + \beta E_2
+\end{equation}
+
+where $0 \leq \beta \leq 1$ and $\alpha = 1 - \beta$.
+We can view the problem as a multi-objective optimization:
+minimizing $E_1$ will lead to better accuracy while
+minimizing $E_2$ will create more separation between activations of
+nodes in the hidden layers. The goal of the $\alpha$ and $\beta$
+multipliers is to balance the error such that we achieve
+both good accuracy and separation.
+
+We calculate our learning rule based on $E$ via
+
+\begin{equation}
+  \frac{\partial E}{\partial w_{ji}} = \alpha \frac{\partial E_1}{\partial w_{ji}} + \beta \frac{\partial E_2}{\partial w_{ji}}
+\end{equation}
+
+where $\frac{\partial E_1}{\partial w_{ji}}$ is the standard mean-squared error gradient
+
+\todo{insert actual equation for e1 gradient which I don't remember currently and don't feel like looking up}
+\begin{equation}
+  \frac{\partial E_1}{\partial w_{ji}} = 
+\end{equation}
+
+We must calculate $\frac{\partial E_2}{\partial w_{ji}}$. This derivation is
+complicated and thus we have moved this to Appendix
+\todo{ref to appendix and actually write out derivation}.
+We find the following gradient
+
+\todo{insert final e2 gradient}
+\begin{equation}
+  \frac{\partial E_2}{\partial w_{ji}} = 
+\end{equation}
+
+In practice, we found calculating this term was quite time intensive, and thus
+we cut off the gradient after one layer as follows
+
+\begin{equation}
+  \frac{\partial E_2}{\partial w_{ji}} = \sum_{p=1}^{N} -N(a_{H_{l_j}}^p - \overline{a_{H_{l_j}}})a_{H_{l_j}}^p(1-a_{H_{l_j}}^p)a_{H_{l-1_i}}
+\end{equation}
+
+In practice, this simplification means that our error function alters weight
+$w_{ji}$ to maximize distances between nodes in layer $H_{l}$. In theory, this
+could be problematic as weight $w_{ji}$ can affect the activations of all
+hidden nodes in layers $H_{t}$ where $t \geq l$. However, in practice we
+found this tweak still yielded separation of hidden nodes.
 
 \subsection{Rule Extraction}
 \label{sec:re}
