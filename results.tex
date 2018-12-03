@@ -16,12 +16,19 @@ the $E1$ accuracy and the $E_2$ error. Our goal is to achieve
 high comparable $E_1$ accuracy but allso higher $E_2$ when including
 $E_2$ in our error term for the network.
 
-\begin{table} 
-  \begin{tabular}{|l|r|}
-    dataset & blah \\
-  \end{tabular}
-  \caption{UCI Machine Learning Datasets \todo{fill out table}}
-  \label{tab:datasets}
+\begin{table}[]
+  \centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+Dataset    & Attributes & Classes & Samples \\ \midrule
+Iris       & 4          & 3       & 150     \\
+Ecoli      & 7          & 8       & 336     \\
+Ionosphere & 34         & 2       & 351     \\
+Seeds      & 7          & 3       & 210     \\
+Waveform   & 21         & 3       & 5000    \\ \bottomrule
+\end{tabular}
+\caption{UCI Machine Learning Datasets \todo{fill out table}}
+\label{tab:datasets}
 \end{table}
 
 There were a number of important design decisions for our networks
@@ -73,5 +80,27 @@ which we describe briefly below:
   mean-squared error $E_1/N$ as well as the average node separation
   $-E_2/N^2$.
 \end{enumerate}
+
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{|l|r|r|r|r|}
+    \hline
+    Dataset & 
+    \multicolumn{2}{c|}{$E_1/N$} & 
+    \multicolumn{2}{c|}{$-2E_2/N^2$} \\
+    \cline{2-5}
+    & $E_1$ only & $E_1$ and $E_2$ & $E_1$ only & $E_1$ and $E_2$ \\
+    \hline
+    Iris & & & & \\
+    Ecoli & & & & \\
+    Ionosphere & & & & \\
+    Seeds & & & & \\
+    Waveform & & & & \\
+    \hline
+  \end{tabular}
+  \caption{Mean-Squared Error and Hidden Layer Node Separation for Datasets \todo{fill out table}}
+  \label{tab:e1_e2_avgs}  
+\end{table}
 
 %From Reggia: What were the findings?Visualizations for the results
