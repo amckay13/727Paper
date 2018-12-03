@@ -5,11 +5,21 @@ To test the effectiveness of our new error term for rule extraction,
 we applied our approach to five \todo{will we actually do 5 datasets}
 datasets from the UCI Machine Learning Repository \cite{uci}. Our
 datasets are all classifications problems, covering a wide-range of
-use-cases including
-\todo{add description of a few datasets once we decide on final set}
-. An overview of our datasets is given in \ref{tab:datasets}.
+use-cases. \textit{Iris} is a classic classification dataset which
+contains iris flower types and four associated length
+measurements of the petal and sepal of the flower. \textit{Ecoli}
+records the localization site of a protein and a number of
+physical measurements including amino acid content of the outer membrane
+and periplasmic proteins. \textit{Ionosphere} contains radar data collected
+from high-frequency antennas and whether or not the collected data
+contains evidence of the ionosphere. \textit{Seeds} describes three
+varieties of wheat and geometrical properties of their kernels.
+Finally, \textit{Waveform} describes three different types of waves
+using 40 noisy measurements, where noise is generated normally
+(with a mean of 0 and variance of 1).
+An overview of our datasets is given in \ref{tab:datasets}.
 
-In particular, we ran each dataset using two different approaches. The first
+We ran each dataset using two different approaches. The first
 used only standard mean-squared error $E_1$. The second used both
 $E_1$ and our node separation term $E_2$. For each run, we recorded
 the $E1$ accuracy and the $E_2$ error. Our goal is to achieve
@@ -20,12 +30,12 @@ $E_2$ in our error term for the network.
   \centering
 \begin{tabular}{@{}llll@{}}
 \toprule
-Dataset    & Attributes & Classes & Samples \\ \midrule
-Iris       & 4          & 3       & 150     \\
-Ecoli      & 7          & 8       & 336     \\
-Ionosphere & 34         & 2       & 351     \\
-Seeds      & 7          & 3       & 210     \\
-Waveform   & 21         & 3       & 5000    \\ \bottomrule
+Dataset             & Attributes & Classes & Samples \\ \midrule
+\textit{Iris}       & 4          & 3       & 150     \\
+\textit{Ecoli}      & 7          & 8       & 336     \\
+\textit{Ionosphere} & 34         & 2       & 351     \\
+\textit{Seeds}      & 7          & 3       & 210     \\
+\textit{Waveform}   & 21         & 3       & 5000    \\ \bottomrule
 \end{tabular}
 \caption{UCI Machine Learning Datasets \todo{fill out table}}
 \label{tab:datasets}
@@ -92,11 +102,11 @@ which we describe briefly below:
     \cline{2-5}
     & $E_1$ only & $E_1$ and $E_2$ & $E_1$ only & $E_1$ and $E_2$ \\
     \hline
-    Iris & & & & \\
-    Ecoli & & & & \\
-    Ionosphere & & & & \\
-    Seeds & & & & \\
-    Waveform & & & & \\
+    \textit{Iris} & & & & \\
+    \textit{Ecoli} & & & & \\
+    \textit{Ionosphere} & & & & \\
+    \textit{Seeds} & & & & \\
+    \textit{Waveform} & & & & \\
     \hline
   \end{tabular}
   \caption{Mean-Squared Error and Hidden Layer Node Separation for Datasets \todo{fill out table}}
