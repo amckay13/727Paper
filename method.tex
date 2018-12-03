@@ -63,9 +63,19 @@ We calculate our learning rule based on $E$ via
 
 where $\frac{\partial E_1}{\partial w_{ji}}$ is the standard mean-squared error gradient
 
-\todo{insert actual equation for e1 gradient which I don't remember currently and don't feel like looking up}
 \begin{equation}
-  \frac{\partial E_1}{\partial w_{ji}} = 
+  \frac{\partial E_1}{\partial w_{ji}} = -\delta_{L_j}a_{L-1_i} 
+\end{equation}
+
+where $L$ is the layer that contains node $j$, $L-1$ is the previous layer
+which contains node $i$, and $\delta_{L_j}$ is given by
+
+\begin{equation}
+  \delta_{L_j} =
+  \begin{cases}
+    (t_{O_j} - a_{O_j})a_{O_j}(1-a_{O-j}) & j \in L = O \\
+    (\sum_{k \in L+1}{\delta_{L+1_k}w_{kj}})a_{L_j}(1-a_{L_j}) & j \in L \neq O
+  \end{cases}
 \end{equation}
 
 We must calculate $\frac{\partial E_2}{\partial w_{ji}}$. This derivation is
