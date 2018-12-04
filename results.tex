@@ -37,7 +37,7 @@ Dataset             & Attributes & Classes & Samples \\ \midrule
 \textit{Seeds}      & 7          & 3       & 210     \\
 \textit{Waveform}   & 21         & 3       & 5000    \\ \bottomrule
 \end{tabular}
-\caption{UCI Machine Learning Datasets \todo{fill out table}}
+\caption{UCI Machine Learning Datasets}
 \label{tab:datasets}
 \end{table}
 
@@ -72,6 +72,13 @@ which we describe briefly below:
   $\alpha$ simply initialized to $1-\beta$ after this process.
 \item
   We set the weight decay factor $\lambda$ to 0.00001 as used in \cite{thuan11}.
+\item
+  In practice, despite the weight decay factor, some weights become large which
+  can cause hidden node activations to be very close to $1$ ($1$ with floating
+  point cutoff) regardless of the input. These nodes do not help cluster inputs
+  and add unnecessary complication to rule extraction. Thus, for any node which
+  reports an activation of $1$ for all validation data is pruned from the
+  network.
 \item
   We implemented early stopping to make training quicker. We use a simple
   method which stops after $100$ epochs if a new best accuracy on the
