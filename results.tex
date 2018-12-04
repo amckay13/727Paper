@@ -20,11 +20,15 @@ using 40 noisy measurements, where noise is generated normally
 An overview of our datasets is given in \ref{tab:datasets}.
 
 We ran each dataset using two different approaches. The first
-used only standard mean-squared error $E_1$. The second used both
+used only standard mean-squared error $E_1$
+\footnote{Note that we use $E_1$ to refer to $E_1+E_3$ for simplicity, as
+$E_3$ is included for both approaches}. The second used both
 $E_1$ and our node separation term $E_2$. For each run, we recorded
-the $E1$ accuracy and the $E_2$ error. Our goal is to achieve
-high comparable $E_1$ accuracy but allso higher $E_2$ when including
-$E_2$ in our error term for the network.
+the accuracy on the validation data and the $E_2$ error.
+We first test to see if including $E_2$ in our error causes either
+a significant decrease in accuracy or a significant increase
+in $E_2$ hidden node separation. We then use C5.0 rule extraction
+to assess if including $E_2$ leads to fewer rules generated.
 
 \begin{table}[]
   \centering
@@ -100,26 +104,31 @@ which we describe briefly below:
   $-E_2/N^2$.
 \end{enumerate}
 
-\begin{table}[t]
+\begin{table*}[t!]
   \centering
   \small
-  \begin{tabular}{|l|r|r|r|r|}
+  \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|r|r|}
     \hline
     Dataset & 
-    \multicolumn{2}{c|}{$E_1/N$} & 
-    \multicolumn{2}{c|}{$-2E_2/N^2$} \\
-    \cline{2-5}
-    & $E_1$ only & $E_1$ and $E_2$ & $E_1$ only & $E_1$ and $E_2$ \\
+    \multicolumn{6}{c|}{$E_1/N$} & 
+    \multicolumn{6}{c|}{$-2E_2/N^2$} \\
+    \cline{2-13}
+    & \multicolumn{3}{c|}{$E_1$ only} &
+    \multicolumn{3}{c|}{$E_1$ and $E_2$} &
+    \multicolumn{3}{c|}{$E_1$ only} &
+    \multicolumn{3}{c|}{$E_1$ and $E_2$} \\
+    \cline{2-13}
+    & 1 & 2 & 3 & 1 & 2 & 3 & 1 & 2 & 3 & 1 & 2 & 3 \\
     \hline
-    \textit{Iris} & & & & \\
-    \textit{Ecoli} & & & & \\
-    \textit{Ionosphere} & & & & \\
-    \textit{Seeds} & & & & \\
-    \textit{Waveform} & & & & \\
+    \textit{Iris} & \textbf{0.98} & \textbf{0.98} & 0.98 & 0.90 & 0.89 & 0.96 & 0.03 &0.08 & 0.10 & \textbf{0.07} & \textbf{0.10} & \textbf{0.13} \\
+    \textit{Ecoli} & \textbf{0.85} & \textbf{0.83} & 0.79 & 0.73 & 0.78 & 0.79 & 0.01 & 0.05 & 0.07 & \textbf{0.05} & \textbf{0.09} & \textbf{0.10} \\
+    \textit{Ionosphere} & & & & & & & & & & & &\\
+    \textit{Seeds} & 0.88 & \textbf{0.89} & 0.86 & 0.85 & 0.85 & 0.84 & 0.01 & 0.03 & 0.06 & \textbf{0.4} & \textbf{0.06} & \textbf{0.09} \\
+    \textit{Waveform} & & & & & & & & & & & &\\
     \hline
   \end{tabular}
   \caption{Mean-Squared Error and Hidden Layer Node Separation for Datasets \todo{fill out table}}
   \label{tab:e1_e2_avgs}  
-\end{table}
+\end{table*}
 
 %From Reggia: What were the findings?Visualizations for the results
