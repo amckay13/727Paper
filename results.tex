@@ -71,6 +71,8 @@ which we describe briefly below:
   \end{enumerate}
   $\alpha$ simply initialized to $1-\beta$ after this process.
 \item
+  We set the weight decay factor $\lambda$ to 0.00001 as used in \cite{thuan11}.
+\item
   We implemented early stopping to make training quicker. We use a simple
   method which stops after $100$ epochs if a new best accuracy on the
   training data has not been achieved. In practice, we found $100$ epochs is
