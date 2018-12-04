@@ -41,10 +41,17 @@ activations in each hidden layer
 
 where $M$ is the number of hidden layers.
 
+We add a third error term $E_3$ that aims to minimize our weights, given
+by
+
+\begin{equation}
+  E_3 = \sum_{j} \sum_{i} w_{ji}^2
+\end{equation}
+
 We define our total error term as
 
 \begin{equation}
-  E = \alpha E_1 + \beta E_2
+  E = \alpha E_1 + \beta E_2 + \lambda E_3
 \end{equation}
 
 where $0 \leq \beta \leq 1$ and $\alpha = 1 - \beta$.
@@ -53,12 +60,15 @@ minimizing $E_1$ will lead to better accuracy while
 minimizing $E_2$ will create more separation between activations of
 nodes in the hidden layers. The goal of the $\alpha$ and $\beta$
 multipliers is to balance the error such that we achieve
-both good accuracy and separation.
+both good accuracy and separation. The $E_3$ term is included
+to minimize our weights; large weights will push our sigmoid
+activations to $1$ which will in turn create less separation in
+hidden node activations.
 
 We calculate our learning rule based on $E$ via
 
 \begin{equation}
-  \frac{\partial E}{\partial w_{ji}} = \alpha \frac{\partial E_1}{\partial w_{ji}} + \beta \frac{\partial E_2}{\partial w_{ji}}
+  \frac{\partial E}{\partial w_{ji}} = \alpha \frac{\partial E_1}{\partial w_{ji}} + \beta \frac{\partial E_2}{\partial w_{ji}} + \lambda \frac{\partial E_3}{\partial w_{ji}}
 \end{equation}
 
 where $\frac{\partial E_1}{\partial w_{ji}}$ is the standard mean-squared error gradient
@@ -95,11 +105,17 @@ we cut off the gradient after one layer as follows
   \frac{\partial E_2}{\partial w_{ji}} = \sum_{p=1}^{N} -N(a_{H_{l_j}}^p - \overline{a_{H_{l_j}}})a_{H_{l_j}}^p(1-a_{H_{l_j}}^p)a_{H_{l-1_i}}
 \end{equation}
 
-In practice, this simplification means that our error function alters weight
+This simplification means that our error function alters weight
 $w_{ji}$ to maximize distances between nodes in layer $H_{l}$. In theory, this
 could be problematic as weight $w_{ji}$ can affect the activations of all
 hidden nodes in layers $H_{t}$ where $t \geq l$. However, in practice we
 found this tweak still yielded separation of hidden nodes.
+
+We can simply calculate $\frac{\partial E_3}{\partial w_{ji}}$ to get the following
+
+\begin{equation}
+  \frac{\partial E_3}{\partial w_{ji}} = 2 w_{ji}
+\end{equation}
 
 \subsection{Rule Extraction}
 \label{sec:re}
