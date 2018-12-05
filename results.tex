@@ -114,7 +114,8 @@ configurations in our experiment to create a control case that would
 form the baseline for comparisons. 
 
 We have recorded the average validation error and average node separation
-for each dataset in Table~\ref{tab:e1_e2_avgs}. The large left column of results
+for each dataset over the 21 runs in Table~\ref{tab:e1_e2_avgs}.
+The large left column of results
 gives the average validation error for both of the different errors
 $E_1$ only and $E_1$ and $E_2$, and for $1$, $2$, and $3$ hidden layers.
 The large right column of results
@@ -124,17 +125,19 @@ $E_1$ only and $E_1$ and $E_2$, and for $1$, $2$, and $3$ hidden layers.
 For each of the averages in the table, we compared performance with only the
 $E_1$ error term and the $E_1$ and $E_2$ error term by performing a t-test
 for statistically significant difference. We bolded each value in the table
-that was determined significantly ($p < 0.05$) better. These numbers are mostly what
-we would expect to see. In every case, including the $E_2$ error term
-significantly increased the hidden node separation, by an average of
-0.04. In twelve of the cases, average validation accuracy is significantly
-better with only the $E_1$, but only by a relatively small margin of
+that was determined significantly ($p < 0.05$) better.
+In every case, including the $E_2$ error term
+significantly increased the hidden node separation \todo{by an average of
+0.04}. In twelve of the cases, average validation accuracy is significantly
+better with only $E_1$, but only by a relatively small margin of
 6\%. It should be noted that while the average margin of difference is
 small, some datasets experienced rather large drops in accuracy. For instance,
 \textit{Yeast} dropped by over 13\% for the two deeper network configurations.
 These results show that, in many cases, adding in the $E_2$ error can
 significantly increase hidden node separation while maintaining comparable
-accuracy to networks with only $E_1$  error.
+accuracy to networks with only $E_1$  error, but this is not always the
+case as in \textit{Yeast} as $E_2$ separation can come at the cost of
+accuracy.
 
 We next discuss the results of the Rule Extraction experiments,
 where we test how inclusion of the $E_2$ term affects the number
@@ -145,17 +148,45 @@ Once we trained networks for each dataset with
 one, two, and three hidden layers, we ran 21 trials on each performing
 rule extraction, reporting the mean of these runs. We report the
 number of rule intervals generated instead of the number of network
-rules because it gives a better idea of the complexity of the rules
-that are being generated in addition to a rough metric of size. The
-number of rule intervals decreases for most cases, with the exceptions
-being the Seeds dataset with two hidden layers, which increases by a
-small amount, and both the Seeds and Yeast datasets with only one
-hidden layer. \todo{run paired t tests?}However, our hypothesis is
-still supported, as the two configurations that truly fail to reduce
-the number of generated intervals are the ones with only one hidden
-layer. 
+rules because C5.0 always reports at maximum one rule for each output
+class, where the condition of each rule is a disjunction of some number
+of different intervals over the inputs \todo{is this right?}.
 
-The other metric of success for rule extraction is the accuracy of the rules generated; if fewer rules were being generated but those pruned rules lost important context than the rules would actually be worse, not better. There are five configurations for which rule accuracy decreases with the addition of the E2 term, four of which are small and \todo{not significantly significant? Prove with t tests}Waveform with two hidden layers, Seeds with two hidden layers, Ionosphere with three hidden layers and Ecoli with three hidden layers decrease by about .6\%, .4\%, .4\%, and 2.6\% respectively. However, in the fifth instance, the rule accuracy of Yeast with one hidden layer drops by 7\%. While there are some small deceases, and the Yeast outlier, it is important to note that for many of the configurations, the E2 term actually brought rule accuracy up, and often by a large amount. This is most notable in the Yeast datasets with two and three hidden layers, whose rule accuracy increased by 25\% and 26\% respectively. This is especially interesting as Yeast is one of the most difficult datasets to classify, with 10 output classes that are not well separated. 
+For most cases, the number of rule intervals decrease when we add
+the $E_2$ error term \todo{run paired t tests?}.
+On average, adding in the $E_2$ error term resulted in a
+\todo{compute
+  average difference in percentage of rules between $E_1$ and $E_2$
+  once we know which are stat sig}
+percentage difference in rules generated.
+Notably, the exceptions to this reduction in rules generated are
+the Seeds dataset with two hidden layers and both the
+Seeds and Yeast datasets with only one
+hidden layer \todo{include visualizations of these as
+  compared to one that does well to attempt to explain why
+  they don't do well.}
+
+%% However, our hypothesis is
+%% still supported, as the two configurations that truly fail to reduce
+%% the number of generated intervals are the ones with only one hidden
+%% layer. 
+
+The other metric of success for rule extraction is the accuracy of the
+rules generated; if fewer rules were being generated but those pruned rules
+lost important context than the rules would actually be worse, not better.
+There are five configurations for which rule accuracy decreases with the
+addition of the E2 term, four of which are small and \todo{not significantly
+  significant? Prove with t tests}Waveform with two hidden layers, Seeds with
+two hidden layers, Ionosphere with three hidden layers and Ecoli with three
+hidden layers decrease by about .6\%, .4\%, .4\%, and 2.6\% respectively.
+However, in the fifth instance, the rule accuracy of Yeast with one hidden
+layer drops by 7\%. While there are some small deceases, and the Yeast outlier,
+it is important to note that for many of the configurations, the E2 term
+actually brought rule accuracy up, and often by a large amount. This is most
+notable in the Yeast datasets with two and three hidden layers, whose rule
+accuracy increased by 25\% and 26\% respectively. This is especially interesting
+as Yeast is one of the most difficult datasets to classify, with 10 output
+classes that are not well separated. 
 
 \begin{table*}[t!]
   \centering
