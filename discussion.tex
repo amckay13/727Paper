@@ -8,7 +8,11 @@ example, in the original paper, the researchers also explore E3 and E4
 terms that pushes hidden unit activation vectors apart if they are from different
 output classes and pushes them closer together if they are from the
 same output class. That theory could be extended to multi-layer hidden
-networks as well. We also limited our network structure to fully
+networks as well. Additionally, the researchers implemented pruning,
+which removed weights deemed unnecessary between the input and hidden
+layer, while we did not. Experiments could be run that implement
+pruning between all, or just between some layers in our more
+complicated structure. We also limited our network structure to fully
 connected feedforward networks, while in practice many networks that
 have multiple hidden layers are recurrent or convolutional. Optimizing
 rule extraction for those more complicated structures could also be an
