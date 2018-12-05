@@ -105,16 +105,40 @@ which we describe briefly below:
   $-E_2/N^2$.
 \end{enumerate}
 
-It is important to note that many of the design decisions we
+It is important to note that some of the design decisions we
 made do not directly correspond to the decisions made in the paper
 that inspired this work~\cite{thuan11}. Because of this, it does not
-make sense to directly compare our numerical results with theirs,
-which was one of the reasons we incuded single hidden layer
-configurations in our experiment, to create a control case that would
+make sense to directly compare our numerical results with theirs.
+Thus we included single hidden layer
+configurations in our experiment to create a control case that would
 form the baseline for comparisons. 
 
+We have recorded the average validation error and average node separation
+for each dataset in Table~\ref{tab:e1_e2_avgs}. The large left column of results
+gives the average validation error for both of the different errors
+$E_1$ only and $E_1$ and $E_2$, and for $1$, $2$, and $3$ hidden layers.
+The large right column of results
+gives the average hidden node separation ($-E_2/N^{2}$)
+for both of the different errors
+$E_1$ only and $E_1$ and $E_2$, and for $1$, $2$, and $3$ hidden layers.
+For each of the averages in the table, we compared performance with only the
+$E_1$ error term and the $E_1$ and $E_2$ error term by performing a t-test
+for statistically significant difference. We bolded each value in the table
+that was determined significantly (p < 0.05) better. These numbers are mostly what
+we would expect to see. In every case, including the $E_2$ error term
+significantly increased the hidden node separation, by an average of
+0.04. In twelve of the cases, average validation accuracy is significantly
+better with only the $E_1$, but only by a relatively small margin of
+6\%. It should be noted that while the average margin of difference is
+small, some datasets experienced rather large drops in accuracy. For instance,
+\textit{Yeast} dropped by over 13\% for the two deeper network configurations.
+These results show that, in many cases, adding in the $E_2$ error can
+significantly increase hidden node separation while maintaining comparable
+accuracy to networks with only $E_1$  error.
+
 The results of the Rule Extraction portion of our experiment are
-captured in Table III. Once we trained networks for each dataset with
+captured in Table~\ref{tab:re_results}.
+Once we trained networks for each dataset with
 one, two, and three hidden layers, we ran 21 trials on each performing
 rule extraction, reporting the mean of these runs. We report the
 number of rule intervals generated instead of the number of network
