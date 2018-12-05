@@ -152,21 +152,40 @@ Once we trained networks for each dataset with
 one, two, and three hidden layers, we ran 21 trials on each performing
 rule extraction, reporting the mean of these runs. We report the
 number of rule intervals generated instead of the number of network
-rules because C5.0 always reports at maximum one rule for each output
+rules because C5.0 tends to reports at maximum one rule for each output
 class, where the condition of each rule is a disjunction of some number
-of different intervals over the inputs \todo{is this right?}.
+of different intervals over the inputs.
 
 For most cases, the number of rule intervals decrease when we add
-the $E_2$ error term \todo{run paired t tests?}.
-On average, adding in the $E_2$ error term resulted in a
-\todo{compute
-  average difference in percentage of rules between $E_1$ and $E_2$
-  once we know which are stat sig}
-percentage difference in rules generated.
-Notably, the exceptions to this reduction in rules generated are
+the $E_2$ error term. Additionally, the rule accuracy across all
+datasets and configurations stayed around the same, or actually
+increased, when $E_2$ was included. To discover if these results were statistically
+significant, we ran paired t-tests on the change in rule intervals
+generated and as well as the change in rule accuracy. The standard
+confidence level is 0.05, however the Bonferroni correction dictates
+that when performing N tests \todo{cite}, the confidence level should change according
+to:
+\begin{equation}
+  \alpha = \frac{\alpha}{N}
+\end{equation}
+We run tests for all five datasets with three configurations for both
+rule intervals and rule accuracy, bringing N to 30. Therefore,
+significance for us is defined as p < 0.05 / 30 =
+0.00167. \ref{pval_results} shows the p values calculated for each
+test, with the statistically significant ones bolded. 
+
+%On average, adding in the $E_2$ error term resulted in a
+%\todo{compute average difference in percentage of rules between $E_1$
+%and $E_2 once we know which are stat sig}
+%percentage difference in rules generated.
+There are five dataset configurations that decrease the number of
+intervals statistically significantly with the addition of $E_2$, Ecoli with one
+hidden layer, Waveform with two and three hidden layers, and Yeast
+with two and three hidden layers. While many of the others also
+reduce the number of intervals generated, just not significantly, it is notable that
 the Seeds dataset with two hidden layers and both the
 Seeds and Yeast datasets with only one
-hidden layer. This is interesting as both of these datasets
+hidden layer do not. This is interesting as both of these datasets
 experienced signicantly greater $E_2$ separation for all network
 configurations as noted in Table~\ref{tab:e1_e2_avgs}. In order
 to better understand these outliers, we visualize their hidden node
@@ -184,20 +203,16 @@ Our generated rules are only an approximation of network behaviour,
 thus it is important that we assess the accuracy of the generated rules.
 If fewer rules were generated but those pruned rules
 lost important context then the rules would actually be worse, not better.
-For X \todo{after stat tests fill in} configurations, RE achieved
-statistically similar ($p > 0.05$) or even better ($p < 0.05$)
+For every single dataset and configuration, RE achieved
+statistically similar ($p > 0.00167$) or statistically better ($p < 0.00167$)
 rule accuracy with the $E_2$ term. This is most
 notable in the Yeast datasets with two and three hidden layers, whose rule
 accuracy increased by 25\% and 26\% respectively. This is especially interesting
 as Yeast is one of the most difficult datasets to classify, with 10 output
-classes that are not well separated. However, for Y
-\todo{after stat tests fill in} configurations, rule accuracy decreased
-significantly ($p < 0.05$). 
-A number of configurations across different datasets saw small
-accuracy of drops between .4\% and 2.6\%
-\todo{keep this assuming they are actually statistically significant diffs}.
-However, the rule accuracy of Yeast with one hidden layer drops by over 7\%.
-\todo{explanation of this drop? visualization maybe?}
+classes that are not well separated. 
+%However, the rule accuracy of Yeast with one hidden layer drops by over 7\%.
+\todo{explanation of this drop? we can leave yeast-1 out since its not
+  stat signif}
 
 \begin{table*}[t!]
   \centering
