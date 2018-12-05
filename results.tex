@@ -128,7 +128,8 @@ for statistically significant difference. We bolded each value in the table
 that was determined significantly ($p < 0.05$) better.
 In every case, including the $E_2$ error term
 significantly increased the hidden node separation \todo{by an average of
-0.04}. In twelve of the cases, average validation accuracy is significantly
+  0.04, calculate as percentage of $E_1$?}.
+In twelve of the cases, average validation accuracy is significantly
 better with only $E_1$, but only by a relatively small margin of
 6\%. It should be noted that while the average margin of difference is
 small, some datasets experienced rather large drops in accuracy. For instance,
@@ -162,7 +163,12 @@ percentage difference in rules generated.
 Notably, the exceptions to this reduction in rules generated are
 the Seeds dataset with two hidden layers and both the
 Seeds and Yeast datasets with only one
-hidden layer \todo{include visualizations of these as
+hidden layer. This is interesting as both of these datasets
+experienced signicantly greater $E_2$ separation for all network
+configurations as noted in Table~\ref{tab:e1_e2_avgs}. In order
+to better understand these outliers, we visualize their hidden node
+behaviour in ...
+\todo{include visualizations of these as
   compared to one that does well to attempt to explain why
   they don't do well.}
 
