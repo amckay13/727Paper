@@ -133,4 +133,35 @@ which we describe briefly below:
   \label{tab:e1_e2_avgs}  
 \end{table*}
 
+\begin{table*}[t!]
+  \centering
+  %\small
+  \begin{tabular}{|l|r|r|r|r|r|r|r|r|r|r|r|r|}
+    \hline
+    Dataset & 
+    \multicolumn{6}{c|}{No. Rule Intervals} & 
+    \multicolumn{6}{c|}{Rule Accuracy} \\
+    \cline{2-13}
+    & \multicolumn{3}{c|}{$E_1$ only} &
+    \multicolumn{3}{c|}{$E_1$ and $E_2$} &
+    \multicolumn{3}{c|}{$E_1$ only} &
+    \multicolumn{3}{c|}{$E_1$ and $E_2$} \\
+    \cline{2-13}
+    \hline
+    No. Hidden Layers & 1 & 2 & 3 & 1 & 2 & 3 & 1 & 2 & 3 & 1 & 2 & 3 \\
+    \hline
+    \textit{Iris} & 5.14 & 5.05 & 5.14 & 5.10 & 4.00 & 4.81 & 82.06\% &87.78\% & 92.38\% & 92.86\% & 90.10\% & 91.75\% \\
+    \textit{Ecoli} & 109.00 & 106.67 & 94.05 &61.24 & 79.57 & 96.86 & 34.83\% & 53.94\% & 60.84\% & 59.84\% & 61.55\% & 58.28\% \\
+    \textit{Ionosphere} & 39.55& 46.95& 45.55&30.86 & 37.86&
+                                                             40.85&75.43\% & 84.79\%& 85.36\%&79.60\% & 87.82\%& 85.00\%\\
+    \textit{Seeds} & 37.38 & 43.19 & 40.29 & 45.48 & 43.67 & 36.81 & 41.95\% & 55.67\% & 43.76\% & 42.18\% & 55.33\% & 46.26\% \\
+    \textit{Waveform} & 1,748.35& 1,798.85 & 1,731.3 & 1,085.24 & 1,544.33 &
+                                                                       1,341.05
+                                  & 34.66\% & 50.18\%&49.19\% & 41.15\%&51.73\% & 56.14\%\\
+    \textit{Yeast} &620.24 & 574.71& 553.05&704.43 & 353.81& 351.38&20.72\% & 41.32\%& 43.48\%&13.69\% &66.19\%&69.12\%\\
+    \hline
+  \end{tabular}
+  \caption{Rule Extraction Results: Mean over 21 Runs}
+  \label{tab:re_results}  
+\end{table*}
 %From Reggia: What were the findings?Visualizations for the results
