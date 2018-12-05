@@ -133,6 +133,54 @@ Our rule extraction algorithm is similar to the one in the paper that inspired o
 \item
 5: Combine the rules at each layer to generate network rules
 \end{enumerate}
-In step 4, we had a choice to cluster the middle hidden layer nodes according to the eventual correct class, or according to the following hidden layer. We chose the first option, because of the notion that hidden layers model features, thus it was important to ensure the clustering was would help the algorithm differentiate the feature or decision being modeled at each node in each layer. Connecting this process directly to the output would’ve circumvented context not immediately available to those nodes (although signal from output does affect it because of back propagation). This choice also made connecting the rules generated at each level a bit more intuitive, as each set of rules was modeled on the next. We perform these steps on networks that have been trained with only E1 error as the control, and also on our modified network that incorporates E2. We additionally performed trials on single hidden layer networks in addition to our multi layer ones to form a baseline for comparison. 
+
+In step 4, we had a choice to cluster the middle hidden layer nodes
+according to the eventual correct class, or according to the
+preconditions of the rules in the following hidden layer. We chose the
+first option, because of the notion that hidden layers model features,
+thus it was important to ensure the clustering was would help the
+algorithm differentiate the feature or decision being modeled at each
+node in each layer. Because all the datasets we worked with contained
+continuous input, both steps 3 and 4 created a series of intervals [i1,i2) for
+each hidden node, which constrain the activation of a node j as
+follows:
+\begin{equation}
+  \begin{split}
+    &i_1 \le a_{H_j} \textless i_2 \\
+    &i_1 \le \sigma(w_{j1}x_1 + w_{j2}x_2 + ... + w_{jn}x_n)  \textless i_2
+  \end{split}
+\end{equation}
+Then, at every layer k, C5.0 creates rules that determine which intervals a node's
+activation needs to fall in in order to result in 1) an output class c
+for step 3:
+\begin{equation}
+  i_1 \le a_{H_j} \textless i_2  \longrightarrow  c
+\end{equation}
+or 2) the precondition of a rule in the following hidden layer that
+will be satisifed, given thart any rule r in layer k + 1 is in the form preconditions
+$\longrightarrow$ postcondition:
+\begin{equation}
+  i_1 \le a_{H_j}  \textless i_2  \longrightarrow preconditions_r \epsilon r_{k+1}
+\end{equation}
+
+ Connecting the rules at middle hidden layers directly to the output
+ would’ve circumvented context not immediately available to those
+ nodes (although signal from output does affect it because of back
+ propagation). This choice also made connecting the rules generated at
+ each level a bit more intuitive, as each set of rules was modeled on
+ the next. An example of a generated rule for the \todo{insert
+   reference to example here}.
+
+We perform these steps on networks that have been trained with only E1
+error as the control, and also on our modified network that
+incorporates E2. We additionally performed trials on single hidden
+layer networks in addition to our multi layer ones to form a baseline
+for comparison. While we did not include this in our methodology, it
+is interesting to note that in practice many of the intervals generated are close
+to one another. One could prune rules to be simpler by merging
+intervals that are within some threshold of one another, which would
+lead to a more interpretable set of rules in exchange for decreased
+rule accuracy. We leave any experimentation with such a threshold for
+future work. 
 
 % From Reggia: How'd you do the work?
