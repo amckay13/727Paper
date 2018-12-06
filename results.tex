@@ -2,7 +2,7 @@
 \label{sec:results}
 
 To test the effectiveness of our new error term for rule extraction,
-we applied our approach to six \todo{will we actually do 5 datasets - changed to 6 but double check before submission}
+we applied our approach to six 
 datasets from the UCI Machine Learning Repository \cite{uci}. Our
 datasets are all classifications problems, covering a wide-range of
 use-cases. \textit{Iris} is a classic classification dataset which
@@ -127,8 +127,7 @@ $E_1$ error term and the $E_1$ and $E_2$ error term by performing a t-test
 for statistically significant difference. We bolded each value in the table
 that was determined significantly ($p < 0.05$) better.
 In every case, including the $E_2$ error term
-significantly increased the hidden node separation \todo{by an average of
-  0.04, calculate as percentage of $E_1$?}.
+significantly increased the hidden node separation.
 In twelve of the cases, average validation accuracy is significantly
 better with only $E_1$, but only by a relatively small margin of
 6\%. It should be noted that while the average margin of difference is
@@ -181,23 +180,61 @@ test, with the statistically significant ones bolded.
 There are five dataset configurations that decrease the number of
 intervals statistically significantly with the addition of $E_2$, Ecoli with one
 hidden layer, Waveform with two and three hidden layers, and Yeast
-with two and three hidden layers. While many of the others also
-reduce the number of intervals generated, just not significantly, it is notable that
+with two and three hidden layers. In
+Figures~\ref{fig:waveform_3d_1}, \ref{fig:waveform_3d_2}, \ref{fig:waveform_3d_3} we
+can see why we had this success in the \textit{Waveform} hidden activations
+for the 3 layer network comparing just $E_1$ and $E_1$ with $E_2$.
+For each hidden node, adding in $E_2$ successfully forces the activations
+apart, making hyper-planes more successful in partioning classes. 
+
+It is notable that
 the Seeds dataset with two hidden layers and both the
 Seeds and Yeast datasets with only one
 hidden layer do not. This is interesting as both of these datasets
-experienced signicantly greater $E_2$ separation for all network
+experienced significantly greater $E_2$ separation for all network
 configurations as noted in Table~\ref{tab:e1_e2_avgs}. In order
-to better understand these outliers, we visualize their hidden node
-behaviour in ...
-\todo{include visualizations of these as
-  compared to one that does well to attempt to explain why
-  they don't do well.}
+to better understand these outliers, we visualize the hidden node
+behaviour for a one-layer network of \textit{Seeds}
+in Figures~\ref{fig:seeds_3d_1},\ref{fig:seeds_3d_2},\ref{fig:seeds_3d_3}.
+As we can see, for each of the three runs adding $E_2$ did not help push apart
+activations, but actually managed to make it harder to draw hyper-planes
+to separate the classes.
 
-%% However, our hypothesis is
-%% still supported, as the two configurations that truly fail to reduce
-%% the number of generated intervals are the ones with only one hidden
-%% layer. 
+\begin{figure*}
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_h1_Seed_11_train_3d.png}
+  \caption{\textit{Seeds} run 1 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
+    \label{fig:seeds_3d_1}
+    \endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_h1_Seed_18_train_3d.png}
+  \caption{\textit{Seeds} run 1 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
+    \label{fig:seeds_3d_2}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_h1_Seed_3_train_3d.png}
+  \caption{\textit{Seeds} run 1 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
+    \label{fig:seeds_3d_3}
+\endminipage
+\end{figure*}
+
+\begin{figure*} 
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_4_4_h1_Seed_10_train_3d.png}
+  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 1 activations}
+  \label{fig:waveform_3d_1}    
+    \endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_4_4_h2_Seed_10_train_3d.png}
+  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 2 activations}
+  \label{fig:waveform_3d_2}    
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_4_4_h3_Seed_10_train_3d.png}
+  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 3 activations}
+  \label{fig:waveform_3d_3}  
+\endminipage
+\end{figure*}
 
 Our generated rules are only an approximation of network behaviour,
 thus it is important that we assess the accuracy of the generated rules.
@@ -235,7 +272,7 @@ classes that are not well separated.
     \textit{Yeast} & 0.57 & \textbf{0.57} & \textbf{0.55} & 0.57 & 0.44 & 0.43 & 0.02 & 0.03 & 0.05 & \textbf{0.04} & \textbf{0.10} & \textbf{0.17} \\
     \hline
   \end{tabular}
-  \caption{Average Validation Accuracy and Hidden Layer Node Separation for Datasets \todo{fill out table}}
+  \caption{Average Validation Accuracy and Hidden Layer Node Separation for Datasets}
   \label{tab:e1_e2_avgs}  
 \end{table*}
 
