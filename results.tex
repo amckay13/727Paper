@@ -274,3 +274,26 @@ classes that are not well separated.
   \label{tab:re_results}  
 \end{table*}
 %From Reggia: What were the findings?Visualizations for the results
+\begin{table*}[t!]
+  \centering
+  %\small
+  \begin{tabular}{|l|r|r|r|r|r|r|}
+    \hline
+    Dataset & 
+    \multicolumn{3}{c|}{No. Rule Intervals} &
+    \multicolumn{3}{c|}{Rule Accuracy} \\
+    \cline{2-7}
+    \hline
+    No. Hidden Layers & 1 & 2 & 3 & 1 & 2 & 3 \\
+    \hline
+    \textit{Iris} & 0.9757 & 0.0733 & 0.5568 & 0.1997 & 0.5698 & 0.8836 \\
+    \textit{Ecoli} & \textbf{8.465e-06} & 0.0134 & 0.7625 &\textbf{0.0009} & 0.0802 & 0.4761 \\
+    \textit{Ionosphere} & 0.0140& 0.0210& 0.1414&0.0753 & 0.0291& 0.7931\\
+    \textit{Seeds} & 0.0316 & 0.9319 & 0.6184 &0.9772 & 0.9481 & 0.6141 \\
+    \textit{Waveform} & \textbf{1.91e-06}& 0.0118& \textbf{.0002} & 0.1087 & 0.4614 &0.0139\\
+    \textit{Yeast} &0.0379 &\textbf{0.0002}&\textbf{0.0001}&0.0024 & \textbf{3.933e-06}& \textbf{1.292e-06}\\
+    \hline
+  \end{tabular}
+  \caption{P-Values for t-Tests comparing E1 with E1 + E2}
+  \label{tab:pval_results}  
+\end{table*}
