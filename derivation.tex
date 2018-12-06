@@ -17,7 +17,7 @@ Suppose $j\in H_c$
 \end{align}
 
 For (\ref{p1}), the derivative goes to 0 as none of the previous layers' nodes are reliant on $w_{ji}$. \\
-For (\ref{p2}), the derivative is the same derived in \ref{Thuan2011}. \\
+For (\ref{p2}), the derivative is the same derived in \ref{thuan11}. \\
 For (\ref{p3}), we get:
 
 \begin{align}
@@ -34,7 +34,7 @@ Let $H_t$ be the layer that is $t$ ahead of layer $c$, i.e. for $t=1$, it is the
     \Deriv a_{H_{k_t}}^p = \frac{\partial a_{H_{k_t}}^p}{\partial in_{H_{k_t}}^p}\frac{\partial in_{H_{k_t}}^p}{\partial w_{ji}} \\
     = f'(in_{H_{k_t}}^p)\sum_{k_{t-1}\in H_{t-1}} \frac{\partial in_{H_{k_t}}^p}{a_{H_{k_{t-1}}}^p} \frac{\partial a_{H_{k_{t-1}}}^p}{\partial w_{ji}} \\
     = f'(in_{H_{k_t}}^p) \sum_{k_{t-1}\in H_{t-1}} w_{H_{k_t}H_{k_{t-1}}} \frac{\partial a_{H_{k_{t-1}}}^p}{\partial w_{ji}} \\
-    \overset{\Delta}{=} f'(in_{H_{t_i}}^p)\delta_{H_{t_i}}^p \label{d_gen}
+    \overset{\Delta}{=} f'(in_{H_{k_t}}^p)\delta_{H_{t_i}}^p \label{d_gen}
 \end{align}
 
 $\Deriv a_{H_{k_t}}^q$ is the same, except with all $p$ replaced by $q$. If $t=0$:
@@ -55,3 +55,4 @@ Then through substitution of equations (\ref{d_last})(\ref{d_gen}) into (\ref{de
     = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff (\Deriv\Diff) \\
     = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff  \Bigg[f'(in_{H_{lk}}^p)\delta_{H_{lk}}^p - f'(in_{H_{lk}}^q)\delta_{H_{lk}}^q  \Bigg]
 \end{align}
+Where the $\delta_{H_{lk}}$ are defined relative to the layer $c$ of node $j$. 

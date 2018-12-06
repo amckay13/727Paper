@@ -26,7 +26,7 @@ avenue for future work.
 
 \subsection{Limitations}
 \label{sec:limitations}
-There are many limitations to our work. For instance, there are many
+There are many limitations to our work. There are many
 hyper parameters to consider in the neural networks, including the
 $\beta$ values, the activation function, the weight decay $\lambda$,
 our mechanism for early stopping, and the number of epochs
@@ -35,13 +35,12 @@ parameters could lead to fewer rules generated and/or better rule
 accuracy. We also did not have access to a full suite of GPUs
 and ran our experiments on local desktops, which meant runs took
 hours, sometimes even days. This constraint on our resources affected
-how many iterations of the experiment we could do. It also limited
-the us to networks with at most 3 hidden layers, which may not be enough
+how many iterations of the experiment we could do. It also limited us to networks with at most 3 hidden layers, which may not be enough
 to see if the approach would work at scale. Additionally, we
 used the C5.0 suite to perform rule extraction, but this is the newest
-release of the suite and does not come with documentation. It is
+release of the suite and is not well-documented like prior releases. It is
 therefore possible there are optimizations for rule extraction that we
-did not know to include.
+did not know to include. The rules yielded by rule extraction, as the representative example above shows, often appear to overfit by containing many disjuncts that are singleton intervals, reducing conditions to strict equality of the activations against single values, which would not generalize well for test data. Examining the spread of a node's activations prior to clustering reveals overlap for various regions, which can lower accuracy as such a region cannot be used in rules to discriminate.
 
 \subsection{Conclusion}
 \label{sec:conclusion}
