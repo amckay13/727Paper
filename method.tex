@@ -120,18 +120,24 @@ We can simply calculate $\frac{\partial E_3}{\partial w_{ji}}$ to get the follow
 \subsection{Rule Extraction}
 \label{sec:re}
 
-Our rule extraction algorithm is similar to the one in the paper that inspired our work \cite{thuan11}, with changes in the later steps to account for multiple hidden layers. Given n hidden layers, we:
+Our rule extraction algorithm is similar to the one in the paper that inspired our work \cite{thuan11}, with changes in the later steps to account for multiple hidden layers. Given $l$ hidden layers, we:
 \begin{enumerate}
 \item
-1: Train the network
+Train the network
 \item
-2: Cluster each hidden layer node’s activation values 
+For each hidden layer, beginning at the nth layer and working backwards:
+\subitem
+a) Cluster each hidden layer node’s activation values 
+\subitem
+b) At the $l^{th}$ hidden layer: Use C5.0 \cite{C5} to extract rules from
+the $l^{th}$ layer in terms of the output
+\subitem
+c) At any other hidden layer $k$: Use C5.0 to extract rules from
+the current layer $k$ in terms of the $k+1$ layer's clustered activations
 \item
-3: Extract rules for the output in terms of the nth hidden layer’s clustered activation levels using C5.0 rules
-\item
-4: Extract rules for all hidden layers 2 through n – 1 in terms of the next hidden layer’s rules using C5.0 rules
-\item
-5: Combine the rules at each layer to generate network rules
+Combine the rules at each layer to generate network rules
+\item 
+Calculate rule accuracy on the validation set using the generated network rules
 \end{enumerate}
 
 In step 4, we had a choice to cluster the middle hidden layer nodes
@@ -141,26 +147,26 @@ first option, because of the notion that hidden layers model features,
 thus it was important to ensure the clustering was would help the
 algorithm differentiate the feature or decision being modeled at each
 node in each layer. Because all the datasets we worked with contained
-continuous input, both steps 3 and 4 created a series of intervals [i1,i2) for
-each hidden node, which constrain the activation of a node j as
-follows:
+continuous input, both steps 3 and 4 created a series of intervals [$i_1$,$i_2$) for
+each hidden node, which constrain the activation of the $j^{th}$ node in hidden
+layer $l$ as follows:
 \begin{equation}
   \begin{split}
-    &i_1 \le a_{H_j} \textless i_2 \\
+    &i_1 \le a_{H_{l_j}} \textless i_2 \\
     &i_1 \le \sigma(w_{j1}x_1 + w_{j2}x_2 + ... + w_{jn}x_n)  \textless i_2
   \end{split}
 \end{equation}
-Then, at every layer k, C5.0 creates rules that determine which intervals a node's
+Then, at every layer $l$, C5.0 creates rules that determine which intervals a node's
 activation needs to fall in in order to result in 1) an output class c
 for step 3:
 \begin{equation}
-  i_1 \le a_{H_j} \textless i_2  \longrightarrow  c
+  i_1 \le a_{H_{l_j}} \textless i_2  \longrightarrow  c
 \end{equation}
 or 2) the precondition of a rule in the following hidden layer that
-will be satisifed, given thart any rule r in layer k + 1 is in the form preconditions
+will be satisifed, given thart any rule $r$ in layer $k + 1$ is in the form preconditions
 $\longrightarrow$ postcondition:
 \begin{equation}
-  i_1 \le a_{H_j}  \textless i_2  \longrightarrow preconditions_r \epsilon r_{k+1}
+  i_1 \le a_{H_{l_j}}  \textless i_2  \longrightarrow preconditions_r \epsilon r_{k+1}
 \end{equation}
 
  Connecting the rules at middle hidden layers directly to the output
@@ -171,16 +177,13 @@ $\longrightarrow$ postcondition:
  the next. An example of a generated rule for the \todo{insert
    reference to example here}.
 
-We perform these steps on networks that have been trained with only E1
+It is also important to note that while the paper
+that inspired this work \cite{thuan11} used the Chi2 discretization
+algorithm to cluster the activations, we chose to sort the intervals
+and then merge consecutive intervals whose output class was the same. We perform these steps on networks that have been trained with only $E_1$
 error as the control, and also on our modified network that
-incorporates E2. We additionally performed trials on single hidden
+incorporates $E_2$. We additionally performed trials on single hidden
 layer networks in addition to our multi layer ones to form a baseline
-for comparison. While we did not include this in our methodology, it
-is interesting to note that in practice many of the intervals generated are close
-to one another. One could prune rules to be simpler by merging
-intervals that are within some threshold of one another, which would
-lead to a more interpretable set of rules in exchange for decreased
-rule accuracy. We leave any experimentation with such a threshold for
-future work. 
+for comparison. 
 
 % From Reggia: How'd you do the work?
