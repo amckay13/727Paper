@@ -30,12 +30,14 @@ There are many limitations to our work. For instance, there are many
 hyper parameters to consider in the neural networks, including the
 $\beta$ values, the activation function, the weight decay $\lambda$,
 our mechanism for early stopping, and the number of epochs
-\todo{missing any}. We attempted to optimize these for maximal network
-performance, but it is possible there are configurations that would
-perform better. We also did not have access to a full suite of GPUs
+\todo{missing any}. It is possible that other configurations of these
+parameters could lead to fewer rules generated and/or better rule
+accuracy. We also did not have access to a full suite of GPUs
 and ran our experiments on local desktops, which meant runs took
 hours, sometimes even days. This constraint on our resources affected
-how many iterations of the experiment we could do. Additionally, we
+how many iterations of the experiment we could do. It also limited
+the us to networks with at most 3 hidden layers, which may not be enough
+to see if the approach would work at scale. Additionally, we
 used the C5.0 suite to perform rule extraction, but this is the newest
 release of the suite and does not come with documentation. It is
 therefore possible there are optimizations for rule extraction that we
