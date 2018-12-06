@@ -46,6 +46,24 @@ Dataset             & Attributes & Classes & Samples \\ \midrule
 \label{tab:datasets}
 \end{table}
 
+\begin{figure*}[t!]
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_h1_Seed_11_train_3d.png}
+  \caption{\textit{Seeds} run 1 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
+    \label{fig:seeds_3d_1}
+    \endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_h1_Seed_18_train_3d.png}
+  \caption{\textit{Seeds} run 2 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
+    \label{fig:seeds_3d_2}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_h1_Seed_3_train_3d.png}
+  \caption{\textit{Seeds} run 3 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
+    \label{fig:seeds_3d_3}
+\endminipage
+\end{figure*}
+
 There were a number of important design decisions for our networks
 which we describe briefly below:
 
@@ -112,6 +130,24 @@ make sense to directly compare our numerical results with theirs.
 Thus we included single hidden layer
 configurations in our experiment to create a control case that would
 form the baseline for comparisons. 
+
+\begin{figure*} 
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_4_4_h1_Seed_10_train_3d.png}
+  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 1 activations}
+  \label{fig:waveform_3d_1}    
+    \endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_4_4_h2_Seed_10_train_3d.png}
+  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 2 activations}
+  \label{fig:waveform_3d_2}    
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\columnwidth]{4_4_4_h3_Seed_10_train_3d.png}
+  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 3 activations}
+  \label{fig:waveform_3d_3}  
+\endminipage
+\end{figure*}
 
 We have recorded the average validation error and average node separation
 for each dataset over the 21 runs in Table~\ref{tab:e1_e2_avgs}.
@@ -199,42 +235,6 @@ in Figures~\ref{fig:seeds_3d_1},\ref{fig:seeds_3d_2},\ref{fig:seeds_3d_3}.
 As we can see, for each of the three runs adding $E_2$ did not help push apart
 activations, but actually managed to make it harder to draw hyper-planes
 to separate the classes.
-
-\begin{figure*}
-\minipage{0.32\textwidth}
-  \includegraphics[width=\columnwidth]{4_h1_Seed_11_train_3d.png}
-  \caption{\textit{Seeds} run 1 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
-    \label{fig:seeds_3d_1}
-    \endminipage\hfill
-\minipage{0.32\textwidth}
-  \includegraphics[width=\columnwidth]{4_h1_Seed_18_train_3d.png}
-  \caption{\textit{Seeds} run 1 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
-    \label{fig:seeds_3d_2}
-\endminipage\hfill
-\minipage{0.32\textwidth}
-  \includegraphics[width=\columnwidth]{4_h1_Seed_3_train_3d.png}
-  \caption{\textit{Seeds} run 1 $E_1$ (left) vs. $E_2$ (right) hidden node activations}
-    \label{fig:seeds_3d_3}
-\endminipage
-\end{figure*}
-
-\begin{figure*} 
-\minipage{0.32\textwidth}
-  \includegraphics[width=\columnwidth]{4_4_4_h1_Seed_10_train_3d.png}
-  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 1 activations}
-  \label{fig:waveform_3d_1}    
-    \endminipage\hfill
-\minipage{0.32\textwidth}
-  \includegraphics[width=\columnwidth]{4_4_4_h2_Seed_10_train_3d.png}
-  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 2 activations}
-  \label{fig:waveform_3d_2}    
-\endminipage\hfill
-\minipage{0.32\textwidth}
-  \includegraphics[width=\columnwidth]{4_4_4_h3_Seed_10_train_3d.png}
-  \caption{\textit{Waveform} $E_1$ (left) vs. $E_2$ (right) hidden layer 3 activations}
-  \label{fig:waveform_3d_3}  
-\endminipage
-\end{figure*}
 
 Our generated rules are only an approximation of network behaviour,
 thus it is important that we assess the accuracy of the generated rules.
