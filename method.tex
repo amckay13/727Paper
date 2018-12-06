@@ -174,8 +174,14 @@ $\longrightarrow$ postcondition:
  nodes (although signal from output does affect it because of back
  propagation). This choice also made connecting the rules generated at
  each level a bit more intuitive, as each set of rules was modeled on
- the next. An example of a generated rule for the \todo{insert
-   reference to example here}.
+ the next. An example of a typical generated rule, from the \textit{Ionosphere} dataset, is:
+ \begin{table}[]
+ \begin{align}
+ \notag &4.012\times 10^{-12} \le a_{H_{1_3}} \le 0.729 \vee a_{H_{1_3}} = 0.794 \\ \notag &\vee a_{H_{1_3}} = 0.989 \vee a_{H_{1_3}} = 0.991 \vee a_{H_{1_3}} = 0.993 \\ \notag & \vee a_{H_{1_3}} = 0.995 \vee a_{H_{1_3}} = 0.99901 \vee a_{H_{1_3}} = 0.99994 \\ \notag & \vee a_{H_{1_3}} = 0.99998 \rightarrow 0 \\
+ \notag &0.731 \le a_{H_{1_3}} \le 0.740 \vee 0.826 \le a_{H_{1_3}} \le 0.987 \vee 0.989  \\ \notag & \le a_{H_{1_3}} \le 0.991 \vee 0.991 \le a_{H_{1_3}} \le 0.993  \\ \notag & \vee 0.9935 \le a_{H_{1_3}} \le 0.995 \vee 0.996 \le a_{H_{1_3}} \le 0.9990031  \\ \notag & \vee 0.999032 \le a_{H_{1_3}} \le 0.99991 \vee 0.99994 \le a_{H_{1_3}} \le 0.99997  \\ \notag & \vee 0.99999 \le a_{H_{1_3}} \le 1.0 \rightarrow 1 \\
+ \notag &default \rightarrow 1
+ \end{align}
+ \end{table}
 
 It is also important to note that while the paper
 that inspired this work \cite{thuan11} used the Chi2 discretization
