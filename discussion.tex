@@ -44,6 +44,14 @@ did not know to include. The rules yielded by rule extraction, as the representa
 \subsection{Conclusion}
 \label{sec:conclusion}
 
-We are able to reduce the number of rule intervals generated in five cases with statistical significance, in Ecoli with one hidden layer, Waveform with two and three hidden layers, and Yeast with two and three hidden layers. While this is not a negative result, the other 10 cases were unable to reduce the number rules, and sometimes even increased the number. Rule accuracy did not decrease for any case, but this is a less interesting result for the configurations where the number of rules did not truly change. We therefore conclude that the amendment to backpropagation proposed by \cite{thuan11} does not generalize to deeper, more complex networks. 
+In this paper, we defined and implemented an error term $E_2$ with the goal
+of pushing hidden node activations apart for improved rule extraction. Testing
+on six different datasets showed mixed results; in some cases, adding $E_2$ resulted
+in fewer rules generated and more accurate rules; however, in many cases this
+was not the case. In some cases, adding $E_2$ significantly reduced accuracy
+and even generated more rules. Our results indicate a trend that adding
+more layers results in poorer performance of rule extraction. This leads us
+to the conclusion that adding in the $E_2$ error term for deeper neural networks
+does not improve rule extraction overall.
 
 % From Reggia: What were findings? Visualize results
