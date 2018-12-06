@@ -4,16 +4,16 @@
 Let $H_1, H_2,...,H_L$ be the hidden layers of the network, $H_{lk}$ a node within layer $l$. Then we can write $E_2$ as 
 \begin{gather}
     E_2 = \sum_{p=1}^N E_2^p \\
-    E_2^p = -\frac{1}{2}\sum_{q=1}^N\sum_{l=1}^L\sum_{k\in H_{l}} \Diff^2 = -\frac{1}{2}\sum_{l=1}^L\sum_{k\in H_{l}}\sum_{q=1}^N \Diff^2
+    E_2^p = -\frac{1}{2}\sum_{q=1}^N\sum_{l=1}^L\sum_{k\in H_{l}} (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2 = -\frac{1}{2}\sum_{l=1}^L\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2
 \end{gather}
 
 Suppose $j\in H_c$
 
 \begin{align}
-    \Deriv E_2^p = \Deriv (-\frac{1}{2}\sum_{l=1}^L\sum_{k\in H_{l}}\sum_{q=1}^N \Diff^2) \\
-    = \Deriv (-\frac{1}{2}\sum_{l<c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff^2) \label{p1}\\
-    + \Deriv (-\frac{1}{2}\sum_{k\in H_{c}}\sum_{q=1}^N \Diff^2) \label{p2}  \\
-    + \Deriv (-\frac{1}{2}\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff^2) \label{p3}
+    \Deriv E_2^p = \Deriv (-\frac{1}{2}\sum_{l=1}^L\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2) \\
+    = \Deriv (-\frac{1}{2}\sum_{l<c}\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2) \label{p1}\\
+    + \Deriv (-\frac{1}{2}\sum_{k\in H_{c}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2) \label{p2}  \\
+    + \Deriv (-\frac{1}{2}\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2) \label{p3}
 \end{align}
 
 For (\ref{p1}), the derivative goes to 0 as none of the previous layers' nodes are reliant on $w_{ji}$. \\
@@ -21,8 +21,8 @@ For (\ref{p2}), the derivative is the same derived in \cite{thuan11}. \\
 For (\ref{p3}), we get:
 
 \begin{align}
-    (\ref{p3}) = \Deriv (-\frac{1}{2}\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff^2) \\
-    = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff (\Deriv\Diff) \label{deriv_gen}\\
+    (\ref{p3}) = \Deriv (-\frac{1}{2}\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2) \\
+    = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q) (\Deriv(a_{H_{l_k}}^p - a_{H_{l_k}}^q)) \label{deriv_gen}\\
     % = - \Bigg( \sum_{k_{c+1}\in H_{c+1}}\sum_{q=1}^N (a_{H_{k_{c+1}}}^p - a_{H_{k_{c+1}}}^q) (\Deriv(a_{H_{k_{c+1}}}^p - a_{H_{k_{c+1}}}^q)) + \\
     % \sum_{k_{c+2}\in H_{c+2}}\sum_{q=1}^N (a_{H_{k_{c+2}}}^p - a_{H_{k_{c+2}}}^q) (\Deriv(a_{H_{k_{c+2}}}^p - a_{H_{k_{c+2}}}^q)) + ... \notag \\
     % + \sum_{k_L\in H_{L}}\sum_{q=1}^N (a_{H_{k_{L}}}^p - a_{H_{k_{L}}}^q) (\Deriv(a_{H_{k_{L}}}^p - a_{H_{k_{L}}}^q)) \Bigg) \notag
@@ -51,8 +51,8 @@ $\Deriv a_{H_{k_t}}^q$ is the same, except with all $p$ replaced by $q$. If $t=0
 
 Then through substitution of equations (\ref{d_last})(\ref{d_gen}) into (\ref{deriv_gen}), we get:
 \begin{align}
-    \Deriv (-\frac{1}{2}\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff^2) \\
-    = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff (\Deriv\Diff) \\
-    = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N \Diff  \Bigg[f'(in_{H_{lk}}^p)\delta_{H_{lk}}^p - f'(in_{H_{lk}}^q)\delta_{H_{lk}}^q  \Bigg]
+    \Deriv (-\frac{1}{2}\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)^2) \\
+    = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q) (\Deriv(a_{H_{l_k}}^p - a_{H_{l_k}}^q)) \\
+    = -\sum_{l>c}\sum_{k\in H_{l}}\sum_{q=1}^N (a_{H_{l_k}}^p - a_{H_{l_k}}^q)  \Bigg[f'(in_{H_{lk}}^p)\delta_{H_{lk}}^p - f'(in_{H_{lk}}^q)\delta_{H_{lk}}^q  \Bigg]
 \end{align}
 Where the $\delta_{H_{lk}}$ are defined relative to the layer $c$ of node $j$. 
