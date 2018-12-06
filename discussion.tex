@@ -12,7 +12,13 @@ networks as well. Additionally, the researchers implemented pruning,
 which removed weights deemed unnecessary between the input and hidden
 layer, while we did not. Experiments could be run that implement
 pruning between all, or just between some layers in our more
-complicated structure. We also limited our network structure to fully
+complicated structure. During the clustering phase of rule extraction, it
+is interesting to note that in practice many of the intervals generated are very close
+to one another. One could prune rules to be simpler by merging
+intervals that are within some threshold of one another regardless of
+output class, which would lead to a more interpretable set of rules in exchange for decreased
+rule accuracy. We leave any experimentation with such a threshold for
+future work. We also limited our network structure to fully
 connected feedforward networks, while in practice many networks that
 have multiple hidden layers are recurrent or convolutional. Optimizing
 rule extraction for those more complicated structures could also be an
